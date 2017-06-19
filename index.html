@@ -8,16 +8,5 @@
     <div id='chatlog'></div>
     <input type='button' onclick = sendMessage() value='Send'/>
     <input type='text' id='message' placeholder='Type your message here'/>
-    <script>
-      var ws = new WebSocket('ws://localhost:3000', 'echo-protocol')
-      function sendMessage () {
-        var message = document.getElementById('message')
-        ws.send(message)
-      }
-      ws.addEventListener('message', (e) => {
-        var msg = e.data
-      document.getElementById('chatlog').innerHTML += '<br />' + msg
-      })
-    </script>
   </body>
 </html>
