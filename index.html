@@ -5,12 +5,22 @@
     <title>Echo App</title>
   </head>
   <body>
-    <div id='chatlog'></div>
-    <input type='button' onclick = sendMessage() value='Send'/>
+    <ul id='chatlog'></ul>
+    <input type='button' onclick = "sendMessage()" value='Send'/>
     <input type='text' id='message' placeholder='Type your message here'/>
     <script src='/socket.io/socket.io.js'></script>
     <script>
       var socket = io()
+      function sendMessage () {
+        var msg = document.getElementById('message').value
+        socket.emit('message', msg)
+      }
+      socket.on('chatMessage', (message) => {
+        var ul = document.getElementById('chatlog')
+        var li = document.createElement('li')
+        li.innerHTML = message
+        ul.appendChild(li)
+      })
     </script>
   </body>
 </html>
