@@ -32,7 +32,13 @@ wsServer.on('request', (req) => {
 
     // loop through all the clients
     for (var i in clients) {
+      // Send a message to the client with the message
       clients[i].sendUTF(msgString)
     }
+  })
+  // Listen for client disconnecting
+  connection.on('close', (reasonCode, descritption) => {
+    delete clients[id]
+    console.log(`Peer ${connection.remoteAddress} disconnected`)
   })
 })
