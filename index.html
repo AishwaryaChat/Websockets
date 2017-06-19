@@ -2,11 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Websocket</title>
+    <title>Echo App</title>
   </head>
   <body>
     <div id='chatlog'></div>
     <input type='button' onclick = sendMessage() value='Send'/>
     <input type='text' id='message' placeholder='Type your message here'/>
+    <script src='/socket.io/socket.io.js'></script>
+    <script>
+      var socket = io()
+    </script>
   </body>
 </html>
