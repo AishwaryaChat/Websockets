@@ -2,7 +2,6 @@
 const http = require('http')
 
 const server = http.createServer((req, res) => {
-  res.end('hi')
 })
 
 server.listen(3000, () => {
@@ -28,7 +27,8 @@ wsServer.on('request', (req) => {
   console.log(`Connection accepted ${id}`)
   connection.on('message', (message) => {
     // string message sent to server
-    const msgString = message.utf8data
+    console.log(message)
+    const msgString = message.utf8Data
 
     // loop through all the clients
     for (var i in clients) {
@@ -42,3 +42,7 @@ wsServer.on('request', (req) => {
     console.log(`Peer ${connection.remoteAddress} disconnected`)
   })
 })
+
+// server.get('/', (req, res) => {
+//   res.senFile('inde')
+// })
