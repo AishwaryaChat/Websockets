@@ -7,7 +7,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const {obj} = require('./config.js')
 
-server.use(bodyParser.json())
+server.use(bodyParser.json(''))
 server.use(bodyParser.urlencoded({extended: true}))
 server.use(express.static(path.join(__dirname, '/public/css')))
 server.use('/images', express.static(path.join(__dirname, '/public/images')))
@@ -27,6 +27,10 @@ db.once('open', (err) => {
 
 server.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'main.html'))
+})
+
+server.post('/adduser', (req, res) => {
+  console.log(req.body)
 })
 
 io.on('connection', (socket) => {

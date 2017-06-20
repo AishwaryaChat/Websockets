@@ -9,12 +9,12 @@
     <div class='mainPage'>
       <h1 id='register'>Register</h1>
       <img class='logo' src='/images/logo.ico'/>
-      <form id='submitForm'>
-        <input type='text' id='name' placeholder='First Name' />
-        <input type='text' id='last' placeholder='Last Name' />
-        <input type='email' id='emailID' placeholder="email address" />
-        <input type='password' id='pass' placeholder='password'/>
-        <input type='button' id='subBtn' value='Sign In'>
+      <form action='/adduser' method='post' Content-type='application/json' id='submitForm'>
+        <input type='text' id='firstname' placeholder='First Name' name='firstname' required />
+        <input type='text' id='lastname' placeholder='Last Name' name='lastname' required />
+        <input type='email' id='emailID' placeholder="email address" name='emailAddress' required />
+        <input type='password' id='pass' placeholder='password' name='password' required />
+        <input type='submit' value='Register' id='subBtn' />
       </form>
     </div>
   </body>
