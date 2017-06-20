@@ -34,7 +34,10 @@
   padding: 2%;
 }
 
-
 #subBtn {
   width: inherit;
+}
+
+#register {
+  text-align: center;
 }

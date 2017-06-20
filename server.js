@@ -9,6 +9,7 @@ server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({extended: true}))
 server.use(express.static(path.join(__dirname, '/public/css')))
 server.use('/images', express.static(path.join(__dirname, '/public/images')))
+server.use(express.static(path.join(__dirname, '/public/html')))
 
 http.listen(3000, () => {
   console.log('listening on port 3000')
