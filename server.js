@@ -4,6 +4,8 @@ const http = require('http').Server(server)
 const path = require('path')
 const io = require('socket.io')(http)
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const {obj} = require('./config.js')
 
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({extended: true}))
@@ -11,8 +13,16 @@ server.use(express.static(path.join(__dirname, '/public/css')))
 server.use('/images', express.static(path.join(__dirname, '/public/images')))
 server.use(express.static(path.join(__dirname, '/public/html')))
 
-http.listen(3000, () => {
-  console.log('listening on port 3000')
+// Database connection
+mongoose.connect(`mongodb://${obj.hostName}:${obj.portNumber}/${obj.dbName}`)
+const db = mongoose.connection
+db.on('error', (err) => console.log('Error occured', err))
+db.once('open', (err) => {
+  if (err) {
+    throw new Error('DB not connected')
+  }
+  http.listen(process.env.PORT || 3000)
+  console.log('DB connected successfully at: ', Date())
 })
 
 server.get('/', (req, res) => {

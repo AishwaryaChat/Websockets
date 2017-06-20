@@ -1,7 +1,6 @@
 .mainPage {
   background-color: white;
   width: 50%;
-  height: 100%;
   margin: auto;
   text-align: center;
   border: 2px solid black;
@@ -25,17 +24,13 @@
   padding: 5%;
 }
 
-#emailID, #pass, #subBtn{
+#name, #last, #emailID, #pass, #subBtn{
   display: block;
   margin: auto;
   width: 75%;
   margin-top: 5%;
   margin-bottom: 5%;
   padding: 2%;
-}
-
-#subBtn {
-  width: inherit;
 }
 
 #register {
