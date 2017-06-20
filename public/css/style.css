@@ -1,0 +1,40 @@
+.mainPage {
+  background-color: white;
+  width: 50%;
+  height: 100%;
+  margin: auto;
+  text-align: center;
+  border: 2px solid black;
+  padding: 5%;
+}
+
+#navbar ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#navbar li {
+  display: inline;
+  background-color: pink;
+  padding: 2%;
+}
+
+.logo {
+  padding: 5%;
+}
+
+#emailID, #pass, #subBtn{
+  display: block;
+  margin: auto;
+  width: 75%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding: 2%;
+}
+
+
+#subBtn {
+  width: inherit;
+}
