@@ -12,6 +12,8 @@ const controllers = require('./controllers')
 server.use(bodyParser.json(''))
 server.use(bodyParser.urlencoded({extended: true}))
 server.use(express.static(path.join(__dirname, '/public')))
+server.set('view engine', 'ejs')
+server.set('views', path.join(__dirname, 'views'))
 
 // Database connection
 mongoose.connect(`mongodb://${obj.hostName}:${obj.portNumber}/${obj.dbName}`)
@@ -26,11 +28,11 @@ db.once('open', (err) => {
 })
 
 server.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'main.html'))
+  res.render('')
 })
 
 server.get('/signup', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/signup.html'))
+  res.render('signup')
 })
 
 server.post('/adduser', controllers.users.addUser)
