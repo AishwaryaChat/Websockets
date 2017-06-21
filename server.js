@@ -39,6 +39,10 @@ server.post('/adduser', controllers.users.addUser)
 
 server.post('/checkuser', controllers.users.checkUser)
 
+server.get('/home', (req, res) => {
+  res.render('home')
+})
+
 io.on('connection', (socket) => {
   console.log('a user connected')
   socket.on('message', (message) => {
