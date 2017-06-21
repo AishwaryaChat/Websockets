@@ -1,10 +1,26 @@
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
 .mainPage {
   background-color: white;
   width: 50%;
+  height: 90vh;
   margin: auto;
   text-align: center;
   border: 2px solid black;
-  padding: 5%;
+  padding: 1%;
+}
+
+#navbar {
+  background-color: pink;
+  margin: auto;
+  padding: 2%;
+  width: 75%;
 }
 
 #navbar ul{
@@ -22,15 +38,26 @@
 
 .logo {
   padding: 5%;
+  width: 15%;
 }
 
-#firstname, #lastname, #emailID, #pass, #subBtn{
+
+#firstname, #lastname, #emailID, #pass{
   display: block;
   margin: auto;
   width: 75%;
   margin-top: 5%;
   margin-bottom: 5%;
   padding: 2%;
+}
+
+#subBtn {
+  width: 80%;
+  margin: auto;
+  padding: 2%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  font-size: 1em;
 }
 
 #register {
