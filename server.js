@@ -2,12 +2,12 @@ const express = require('express')
 const server = express()
 const http = require('http').Server(server)
 const path = require('path')
-const io = require('socket.io')(http)
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const {obj} = require('./config.js')
 
 const controllers = require('./controllers')
+const chatServer = require('./lib/chatServer')
 
 server.use(bodyParser.json(''))
 server.use(bodyParser.urlencoded({extended: true}))
@@ -43,10 +43,4 @@ server.get('/home', (req, res) => {
   res.render('home')
 })
 
-io.on('connection', (socket) => {
-  console.log('a user connected')
-  socket.on('message', (message) => {
-    console.log(message)
-    io.emit('chatMessage', message)
-  })
-})
+chatServer.listen(http)
