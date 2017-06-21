@@ -35,6 +35,8 @@ server.get('/signup', (req, res) => {
 
 server.post('/adduser', controllers.users.addUser)
 
+server.post('/checkuser', controllers.users.checkUser)
+
 io.on('connection', (socket) => {
   console.log('a user connected')
   socket.on('message', (message) => {

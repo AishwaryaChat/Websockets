@@ -23,19 +23,18 @@ const hashPassword = (req, res) => {
     if (err) throw new Error(`Not able to generate salt`)
     bcrypt.hash(pass, salt, (err, hash) => {
       if (err) throw new Error(`Not able to generate hash`)
-      req.body.password = hash
-      createUser(req, res, salt)
+      const password = hash
+      createUser(req, res, password, salt)
     })
   })
 }
 
 // creating a user entry in database
-function createUser (req, res, salt) {
-  console.log('password', req.body.password)
+function createUser (req, res, password, salt) {
   Users.create({
     name: req.body.firstname + ' ' + req.body.lastname,
     emailID: req.body.emailAddress,
-    password: req.body.password,
+    password: password,
     salt: salt
   }, (err, response) => {
     if (err) {
@@ -43,6 +42,32 @@ function createUser (req, res, salt) {
       return res.send({err})
     } else {
       return res.send({message: 'OK'})
+    }
+  })
+}
+
+// Authentication user for login
+exports.checkUser = (req, res) => {
+  Users.findOne({'emailID': req.body.emailAddress}, (err, doc) => {
+    if (err) {
+      res.send({err})
+    } else if (doc) {
+      checkPassword(req.body.password, req, res)
+    } else {
+      return res.send({message: 'not found'})
+    }
+  })
+}
+
+const checkPassword = (pass, req, res) => {
+  Users.findOne({'emailID': req.body.emailAddress}, 'password salt', (err, user) => {
+    if (err) res.send({err})
+    else {
+      bcrypt.hash(pass, user.salt, (err, hash) => {
+        if (err) res.send({err})
+        if (hash === user.password) res.send({message: 'OK'})
+        else res.send({message: 'not matched'})
+      })
     }
   })
 }
