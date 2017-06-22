@@ -65,8 +65,10 @@ const checkPassword = (pass, req, res) => {
     else {
       bcrypt.hash(pass, user.salt, (err, hash) => {
         if (err) res.send({err})
-        if (hash === user.password) res.redirect('/home')
-        else res.send({message: 'not matched'})
+        if (hash === user.password) {
+          req.session.user_id = req.body.emailAddress
+          res.redirect('/home')
+        } else res.send({message: 'not matched'})
       })
     }
   })
