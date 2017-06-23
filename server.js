@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 const uuid = require('node-uuid')
 
 const env = require('./config')
-const controllers = require('./controllers')
+const controllers = require('./src/controllers')
 const chatServer = require('./lib/chatServer')
 const session = require('express-session')({
   uniqID: uuid.v4(),
@@ -21,6 +21,7 @@ server.use(bodyParser.json(''))
 server.use(bodyParser.urlencoded({extended: true}))
 server.use(express.static(path.join(__dirname, '/public')))
 server.use(session)
+server.use(express.router)
 
 server.set('view engine', 'ejs')
 server.set('views', path.join(__dirname, 'views'))
