@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 const uuid = require('node-uuid')
 
 const env = require('./config')
-const controllers = require('./src/controllers')
+const router = require('./src/routes')
 const chatServer = require('./lib/chatServer')
 const session = require('express-session')({
   uniqID: uuid.v4(),
@@ -21,10 +21,10 @@ server.use(bodyParser.json(''))
 server.use(bodyParser.urlencoded({extended: true}))
 server.use(express.static(path.join(__dirname, '/public')))
 server.use(session)
-server.use(express.router)
+server.use(router)
 
 server.set('view engine', 'ejs')
-server.set('views', path.join(__dirname, 'views'))
+server.set('views', path.join(__dirname, '/src/views'))
 
 // Database connection
 mongoose.connect(`mongodb://${env.HOST_NAME}:${env.PORT_NUMBER}/${env.DB_NAME}`)
@@ -40,16 +40,12 @@ db.once('open', (err) => {
 
 server.get('/', (req, res) => {
   if (req.session.user_id !== undefined) return res.redirect('/home')
-  res.render('')
+  res.render(path.join(__dirname, 'src/views/index.ejs'))
 })
 
 server.get('/signup', (req, res) => {
   res.render('signup')
 })
-
-server.post('/adduser', controllers.users.addUser)
-
-server.post('/checkuser', controllers.users.checkUser)
 
 server.get('/home', (req, res) => {
   res.render('home')
