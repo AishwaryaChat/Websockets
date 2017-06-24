@@ -7,6 +7,7 @@
   </head>
   <body>
     <div id='content'>
+      <h3 id='user'></h3>
       <div id='room'></div>
       <div id='room-list'></div>
       <div id=messages></div>
@@ -25,7 +26,8 @@
     socket.on('chatMessage', (message) => {
       var box = document.getElementById('messages')
       var p = document.createElement('p')
-      p.innerHTML = message
+      var text = message.user + ': ' + message.text
+      p.innerHTML = text
       box.appendChild(p)
     })
     </script>
